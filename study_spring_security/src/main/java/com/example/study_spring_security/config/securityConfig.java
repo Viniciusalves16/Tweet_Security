@@ -35,11 +35,10 @@ public class securityConfig {
     // Customização de segurança do projeto
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.authorizeHttpRequests(authorize ->
-                        authorize.requestMatchers(HttpMethod.POST, "/login")
-                                .permitAll()
-                                .anyRequest()
-                                .authenticated())
+        httpSecurity.authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers(HttpMethod.POST, "/login").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/users").permitAll()
+                                .anyRequest().authenticated())
                 //todo: em ambiente produtivo desativar
                 .csrf(csrf -> csrf.disable())
                 .oauth2ResourceServer(oauth ->
