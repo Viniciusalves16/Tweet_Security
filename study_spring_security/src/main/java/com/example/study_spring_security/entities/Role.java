@@ -16,4 +16,16 @@ public class Role {
     @Column(name = "role_id")
     private Long RoleId;
     private String name;
+
+
+    public enum Values {
+        BASIC(2), ADMIN(1);
+        long roleId;
+
+
+        Values(long roleId) {
+            this.roleId = roleId;
+        }
+
+    }
 }
