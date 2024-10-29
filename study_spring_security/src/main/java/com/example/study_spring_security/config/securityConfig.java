@@ -7,6 +7,7 @@ import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -33,13 +34,18 @@ public class securityConfig {
 
     // Customização de segurança do projeto
     @Bean
-    private SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity
-                .authorizeHttpRequests(authorize -> authorize.anyRequest().authenticated())
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+        httpSecurity.authorizeHttpRequests(authorize ->
+                        authorize.requestMatchers(HttpMethod.POST, "/login")
+                                .permitAll()
+                                .anyRequest()
+                                .authenticated())
                 //todo: em ambiente produtivo desativar
                 .csrf(csrf -> csrf.disable())
-                .oauth2ResourceServer(oauth -> oauth.jwt(Customizer.withDefaults()))
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+                .oauth2ResourceServer(oauth ->
+                        oauth.jwt(Customizer.withDefaults()))
+                .sessionManagement(session ->
+                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         return httpSecurity.build();
     }

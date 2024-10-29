@@ -1,13 +1,11 @@
 package com.example.study_spring_security.entities;
 
-
 import com.example.study_spring_security.dto.LoginRequestDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 @Getter
