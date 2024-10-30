@@ -1,11 +1,17 @@
 package com.example.study_spring_security.controller;
 
 import com.example.study_spring_security.dto.CreateTweetDto;
+import com.example.study_spring_security.dto.FeedDto;
+import com.example.study_spring_security.dto.FeedItemDto;
 import com.example.study_spring_security.entities.Role;
 import com.example.study_spring_security.entities.Tweet;
 import com.example.study_spring_security.repository.TweetRepository;
 import com.example.study_spring_security.repository.UserRepository;
 import jakarta.transaction.Transactional;
+import org.aspectj.weaver.patterns.BindingTypePattern;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
@@ -51,13 +57,30 @@ public class TweetController {
         var isAdmin = user.get().getRole().stream().anyMatch(role -> role.getName().equalsIgnoreCase(Role.Values.ADMIN.name()));
 
         // Verifica se o usuário que está tentando deletar o tweet é o mesmo que o criou
-        if (isAdmin || tweet.getUser().getUserId().equals(UUID.fromString(token.getName()))){
-          tweetRepository.deleteById(tweetId);
-        }else {
+        if (isAdmin || tweet.getUser().getUserId().equals(UUID.fromString(token.getName()))) {
+            tweetRepository.deleteById(tweetId);
+        } else {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
         }
 
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/feed")
+    public ResponseEntity<FeedDto> feed(@RequestParam(value = "page", defaultValue = "0") int page,
+                                        @RequestParam(value = "pageSize", defaultValue = "10") int pageSize) {
+
+        var tweets = tweetRepository.findAll(
+                        PageRequest.of(page, pageSize, Sort.Direction.DESC, "creationTimestamp"))
+                .map(tweet ->
+                        new FeedItemDto(
+                                tweet.getRoleId(),
+                                tweet.getContent(),
+                                tweet.getUser().getUsername())
+                );
+
+        return ResponseEntity.ok(new FeedDto(
+                tweets.getContent(), page, pageSize, tweets.getTotalPages(), tweets.getTotalElements()));
     }
 
 }
