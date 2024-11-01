@@ -1,0 +1,173 @@
+{
+	"info": {
+		"_postman_id": "2e1edc15-0c8f-47b4-b33c-43b2d49d68f1",
+		"name": "Spring_Security",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32290689"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"bruno\",\r\n  \"password\": \"123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userName\": \"bruno\",\r\n  \"password\": \"123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Tweet",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJiYWNrZW5kIiwic3ViIjoiZmUzYjE0NWItNjZmYy00MWI3LTliYzMtZjM2MDNhMjA5Mjg0IiwiZXhwIjoxNzMwMjQ0NjMyLCJpYXQiOjE3MzAyNDQzMzIsInNjb3BlIjoiQURNSU4ifQ.QQBfKGzaa-sIYQojt5ImFp_2t1beD3z_Rsg-VxrhgMvkilRKI9QYXYMu7GSX50ckAEV9kXMpmodU1_WYivmxW5SYVMSIX6-siXer_Pwq94BCa-YLZFYFRImN8elkdOMTDHhaVxzXIDTDuzTjHrRiieP-AUWsFjux0yPgYMCoIKBdgLioqYQBa_veu1YWF4hu_sX2OWiA3q4kXDZvykwLjrEfFY7zv7mLJB6VTeHTr2H80dIZDLHJwmyMXYnlQqoTZUFCPmDbtz-Wek0Fvl81NPLTEjTRabVvaThZqOeGghcjjBLO99fJvbeMXNIYSh81KRelyJQG6DaehE_ieVyFpA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tweets",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tweets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Tweet",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJiYWNrZW5kIiwic3ViIjoiOGFkYzM5Y2EtNWZkZS00ZDNmLWFhM2YtNjhhYTM4M2JjZDk2IiwiZXhwIjoxNzMwMjQ3NzQyLCJpYXQiOjE3MzAyNDc0NDIsInNjb3BlIjoiQkFTSUMifQ.ndx1JQSVlBFO6WTXsE0TvRJoQpSE-4cjgobWLnV_wEbNKzhjtwkgJLJU6Lra5omGYZ54ZYrfK-1oP1zhxMOZZA-BzXrPqGbhceNl5GdsAwBUz8PaWHvNmqSuOpm0JNMA3Pw8sJNnkyKvF7KB7K0ejzuNLpROnplP7aaOoOoXHwIRJyNtyzFTUSSVMTmuAIc-xiES_tpYPOQXesHn770X2P3h8HXVy2J8VPyXZDRnvdnMLB5SFaz88fpISHRM--yD78N8YvHiwDX605rvS27X42ZoEMxSN8hwCEw2SUk-i7G_pxbdTrlZxO8mYIOepXzCTf-vaRBJKAKzXWzHvwwKAA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tweets/102",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tweets",
+						"102"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Feed",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJiYWNrZW5kIiwic3ViIjoiOGFkYzM5Y2EtNWZkZS00ZDNmLWFhM2YtNjhhYTM4M2JjZDk2IiwiZXhwIjoxNzMwMjQ4OTQzLCJpYXQiOjE3MzAyNDg2NDMsInNjb3BlIjoiQkFTSUMifQ.Xh597UoWlPuuDa4yVp7sVha70g_jHs0IK8rOXew8UExMMExtQcR_FE9P-WELo2EWm5pKVmaz526UcJmp2LSdhO3uP2_6RvpMOF8-zvt4TQy6TB1I6c8KGvW8bHXSLxrDQAewJTsNYws21GLISiuqPLAFIkv20adbDW3BYFk5AhDV9uknp-X80AgDBwemFDlsINOLTB6XjoMBRmHzV3gbF76ZglySUYNpmFt6e_0v2GrIZOpqlNz0IAHaHOd6yHicc1D8CYDkj6cwigLbpaNopWGWmrvhSfUMQ8tmQ56q5so8XtL0VRj2gYcEqLeq9pMsieK-xztZns4kzytMwLUhwQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/feed",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"feed"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
